@@ -1,48 +1,39 @@
 def count_words(text):
-    """
-    Function to count the number of words in a given text.
-    A word is defined as any sequence of characters separated by spaces.
-    """
-    words = text.split()  # Split the text by spaces to get individual words
-    return len(words)  # Return the number of words
+    words = text.split()
+    return len(words)
 
+def count_characters(input_string, include_spaces=True):
+    if include_spaces:
+        return len(input_string)
+    else:
+        return len(input_string.replace(" ", ""))
 
 def word_counter():
-    """
-    Function to handle user input for counting words.
-    Includes error handling for empty input and displays the word count.
-    """
-    print("Enter a sentence or paragraph to count the words:")
-    user_input = input("> ").strip()  # Strip removes leading/trailing whitespaces
+    user_input = input("> ").strip()
 
-    # Error handling for empty input
     if not user_input:
-        print("Error: Input cannot be empty. Please try again.")
+        print("Error: Input cannot be empty. Please try again.\n")
         return
 
-    # Call the word counting function
     word_count = count_words(user_input)
+    char_count_incl_spaces = count_characters(user_input)
+    char_count_excl_spaces = count_characters(user_input, include_spaces=False)
 
-    # Display the result
-    print(f"The total number of words in the given text is: {word_count}\n")
-
+    print("\n=== Analysis Result ===")
+    print(f"Total number of words: {word_count}")
+    print(f"Total number of characters (including spaces): {char_count_incl_spaces}")
+    print(f"Total number of characters (excluding spaces): {char_count_excl_spaces}")
+    print("=======================\n")
 
 def main():
-    """
-    Main function to display the menu and handle user choices.
-    Runs infinitely until the user chooses to exit.
-    """
     while True:
-        # Display menu
-        print("=== Word Counter Menu ===")
-        print("1. Count the number of words")
+        print("=== Word & Character Counter Menu ===")
+        print("1. Analyze text")
         print("2. Exit")
-        print("=========================")
+        print("=====================================")
 
-        # Get user choice
         choice = input("Enter your choice (1 or 2): ").strip()
 
-        # Handle user choices
         if choice == "1":
             word_counter()
         elif choice == "2":
@@ -51,7 +42,5 @@ def main():
         else:
             print("Invalid choice. Please enter 1 or 2.\n")
 
-
-# Entry point of the program
 if __name__ == "__main__":
     main()
